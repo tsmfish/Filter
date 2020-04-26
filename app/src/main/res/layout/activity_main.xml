@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data class="ActivityMainBinding">
+        <variable name="viewModel" type="com.ua.filter.MainViewModel" />
+        <variable name="view" type="com.ua.filter.MainActivity" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".MainActivity">
+
+        <com.github.mikephil.charting.charts.LineChart
+            android:id="@+id/chart"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_margin="8dp"
+            android:visibility="visible"
+            app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" app:layout_constraintBottom_toTopOf="@id/limit"
+            />
+
+        <ImageButton
+            android:id="@+id/load"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:background="@drawable/ic_file_download_black_24dp"
+            android:layout_margin="8dp"
+            android:onClick="@{__ -> view.load()}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/limit" app:layout_constraintBottom_toBottomOf="@id/limit"
+            />
+        
+        <androidx.appcompat.widget.AppCompatSeekBar
+            android:id="@+id/limit"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:max="10000"
+            android:progress="@={viewModel.limit}"
+            app:layout_constraintStart_toEndOf="@id/load" app:layout_constraintEnd_toStartOf="@id/limit_value"
+            app:layout_constraintBottom_toBottomOf="parent"
+            />
+
+        <TextView
+            android:id="@+id/limit_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:text="@{String.valueOf(viewModel.limit)}"
+            app:layout_constraintTop_toTopOf="@id/limit" app:layout_constraintBottom_toBottomOf="@id/limit"
+            app:layout_constraintStart_toEndOf="@id/limit" app:layout_constraintEnd_toStartOf="@id/filter"
+            />
+
+        <androidx.appcompat.widget.AppCompatCheckBox
+            android:id="@+id/filter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:checked="@={viewModel.filter}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/limit" app:layout_constraintBottom_toBottomOf="@id/limit"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
