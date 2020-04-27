@@ -21,6 +21,7 @@ class UnionFind(val size: Int) {
         if (domain[idx] != NO_SET) throw IllegalArgumentException("set with $idx already exists")
         domain[idx] = idx
         numSets += 1
+//        Log.d(LOG_TAG, "UnionFind::makeSet($idx): numSets: $numSets")
     }
 
     private fun extendSet(idxFrom: Int, idxTo: Int) {
@@ -56,6 +57,7 @@ class UnionFind(val size: Int) {
         if (numSets < 0) {
             throw IllegalStateException("We should have at least one set.")
         }
+//        Log.d(LOG_TAG, "UnionFind::union(idxSource: $idxSource, idxDestination: $idxDestination): numSet: $numSets")
     }
 
     /**
@@ -69,7 +71,10 @@ class UnionFind(val size: Int) {
         var idxElement = idx
         while (true) {
             idxElement = domain[idxElement]
-            if (idxElement == domain[idxElement]) return idxElement
+            if (idxElement == domain[idxElement]) {
+//                Log.d(LOG_TAG, "UnionFind::find($idx): $idxElement")
+                return idxElement
+            }
         }
     }
 
@@ -87,6 +92,7 @@ class UnionFind(val size: Int) {
             domain[idxStep] = idxElement
         }
 
+//        Log.d(LOG_TAG, "UnionFind::findAndCompress(idx: $idx): $idxElement")
         return idxElement
     }
 
@@ -106,6 +112,7 @@ class UnionFind(val size: Int) {
             domain[idxStep] = idxRoot
         }
 
+//        Log.d(LOG_TAG, "UnionFind::findMergeCompressTo(idx: $idx, idxRoot: $idxRoot): $isSameSet")
         return isSameSet
     }
 
